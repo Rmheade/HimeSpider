@@ -41,7 +41,7 @@ const render = () => {
 	  const text = gridTempp.querySelector("[text]")
 	  const box = gridTempp.querySelector("[boxx]")
 	  const butt = gridTempp.querySelector("[butt]")
-	  image.src = gridbox.image.src
+	  image.src = gridbox.image
 	  gridTempp.setAttribute('onclick', `beep("${gridbox.url}")`);
 	  butt.addEventListener('click', (e) => {
 		  fav(gridbox.name, e)

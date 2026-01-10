@@ -102,18 +102,6 @@ video{
 	justify-items: center;
 }
 
-/*.drop {
-	height: 40%;
-	background: transparent;
-	color: #EFBF04;
-	font-family: Calgary, sans-serif;
-	font-size: 20px;
-	text-align: center;
-	text-justify: center;
-	border: 3px solid #EFBF04;
-	border-radius: 5px;
-}*/
-
 .dropbtn {
   height: 40%;
   width: 100%;
@@ -174,7 +162,7 @@ video{
 	height: 200px;
 	border: 2px solid #EFBF04;
 	display: grid;
-	grid-template-rows: 5fr 1fr;
+	grid-template-rows: 83% 17%;
 	padding: 5%;
 	aspect-ratio: 1/1;
 	overflow: hidden;
