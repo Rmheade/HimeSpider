@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/><title>StudyBuddy - Personal Study Tool</title>
+<meta content="width=device-width" name="viewport"/>
+<style>
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                background: #000;
+            }
+            #screen canvas {
+                margin: 0 auto;
+            }
+            #github {
+                position: absolute;
+                bottom: 5px;
+                right: 5px;
+            }
+            #loading {
+                position: absolute;
+                font-family: 'Verdana';
+                width: 100%;
+                text-align: center;
+                color: white;
+                font-size: 24px;
+                top: 50%;
+            }
+        </style>
+
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<div id="loading">
+            Loading...<br/>If you are using up arrow please click or press spacebar to enable audio.
+        </div>
+<div id="screen"></div>
+<div id="github"></div>
+<script src="index.min.js"></script>
+
+
+</body>
+</html>
