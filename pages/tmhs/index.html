@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+    </style>
+
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<iframe frameborder="0" id="inner-iframe" src="https://html-classic.itch.zone/html/15749771/thms/index.html" style="height: 100%; width: 100%; border: none;"></iframe>
+<script>
+      // Try to inject keyboard listener into iframe (if same-origin)
+      const innerIframe = document.getElementById('inner-iframe');
+      
+      innerIframe.onload = function() {
+        try {
+          // This only works if the iframe is same-origin
+          innerIframe.contentDocument.addEventListener('keydown', (e) => {
+            if (e.key === "`" || e.key === "~") {
+              window.parent.postMessage({ type: "tilde-pressed" }, "*");
+            }
+            if (e.key === "Escape") {
+              window.parent.postMessage({ type: "escape-pressed" }, "*");
+            }
+          });
+        } catch (err) {
+          // Cross-origin iframe - keyboard events won't work from inside
+          // But the wrapper's keyboard listener above will still catch them
+          console.log("Cross-origin iframe detected - using wrapper keyboard listener");
+        }
+      };
+    </script>
+
+
+</body>
+</html>
