@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<title>Defend the Tank | 3kh0</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-type"/>
+<meta content="initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no, minimal-ui" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<link href="game.css" rel="stylesheet" type="text/css"/>
+<link href="images/logo.jpg" rel="icon" type="image/x-icon">
+<link href="images/splash.jpg" rel="shortcut icon" type="image/x-icon"/>
+<script src="game.js" type="text/javascript"></script>
+</link></meta>
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<div class="gamecenter-activator"></div>
+<body onload="setTimeout(window.scrollTo(0,1),1);">
+<div id="ajaxbar">
+<div id="game">
+<canvas id="canvas"></canvas>
+</div>
+<div id="orientate">
+<img src="landscape.jpg"/></div>
+<div class="play" id="play" onclick="">
+<img src="portrait-start.jpg"/></div>
+</div>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+</body>
+</html>
