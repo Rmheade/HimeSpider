@@ -1,0 +1,56 @@
+<div class="shop" ng-if="zm.sidePanels.construction">
+<div class="shop-title">
+<h2>Unholy Construction</h2>
+<button ng-click="zm.closeSidePanels();">Close</button>
+</div>
+<div class="tabs">
+<button class="{{zm.currentConstructionFilter == 'available' ? 'active' : ''}}" ng-click="zm.filterConstruction('available');">Available</button>
+<button class="{{zm.currentConstructionFilter == 'completed' ? 'active' : ''}}" ng-click="zm.filterConstruction('completed');">Completed</button>
+<button class="{{zm.model.autoconstruction ? 'active' : ''}}" ng-click="zm.model.autoconstruction = !zm.model.autoconstruction" ng-if="zm.model.autoconstructionUnlocked">{{zm.model.autoconstruction ? 'Auto On' : 'Auto Off'}}</button>
+</div>
+<div class="upgrade current-construction" ng-if="zm.model.persistentData.currentConstruction">
+<h4>Building - {{zm.model.persistentData.currentConstruction.name}}</h4>
+<p>Consuming 
+      <span class="energy" ng-if="zm.model.persistentData.currentConstruction.costPerTick.energy">{{zm.model.persistentData.currentConstruction.costPerTick.energy|decimal}} energy</span>
+<span class="blood" ng-if="zm.model.persistentData.currentConstruction.costPerTick.blood">{{zm.model.persistentData.currentConstruction.costPerTick.blood|decimal}} blood</span>
+<span class="brains" ng-if="zm.model.persistentData.currentConstruction.costPerTick.brains">{{zm.model.persistentData.currentConstruction.costPerTick.brains|decimal}} brains</span>
+<span class="bones" ng-if="zm.model.persistentData.currentConstruction.costPerTick.bones">{{zm.model.persistentData.currentConstruction.costPerTick.bones|decimal}} bones</span>
+<span class="parts" ng-if="zm.model.persistentData.currentConstruction.costPerTick.parts">{{zm.model.persistentData.currentConstruction.costPerTick.parts|decimal}} parts</span>
+      each second
+    </p>
+<div class="progress {{zm.model.persistentData.currentConstruction.state == 'building' ? 'active' : 'stopped'}}">
+<div ng-style="{'width':zm.constructionPercent() + '%'}"></div>
+<span>{{zm.constructionPercent()}}%</span>
+</div>
+<p ng-if="!zm.model.persistentData.currentConstruction.shortfall"><strong>Time Remaining: {{zm.model.persistentData.currentConstruction.timeRemaining}}</strong></p>
+<p ng-if="zm.model.persistentData.currentConstruction.shortfall">
+<strong>Production stopped, need more
+      <span class="energy" ng-if="zm.model.persistentData.currentConstruction.shortfall.energy">energy</span>
+<span class="blood" ng-if="zm.model.persistentData.currentConstruction.shortfall.blood">blood</span>
+<span class="brains" ng-if="zm.model.persistentData.currentConstruction.shortfall.brains">brains</span>
+<span class="bones" ng-if="zm.model.persistentData.currentConstruction.shortfall.bones">bones</span>
+<span class="parts" ng-if="zm.model.persistentData.currentConstruction.shortfall.parts">parts</span>
+</strong>
+</p>
+<button ng-click="zm.playPauseConstruction();">{{zm.model.persistentData.currentConstruction.state == 'paused' ? 'Resume' : 'Pause'}}</button>
+<button ng-click="zm.cancelConstruction();">Cancel</button>
+</div>
+<div class="upgrades">
+<div class="upgrade" ng-repeat="upgrade in zm.upgrades">
+<h4>{{upgrade.name}}</h4>
+<p>{{upgrade.description}}</p>
+<label ng-if="zm.currentRankConstruction(upgrade) &lt; upgrade.cap">Time to build: {{upgrade.time}} seconds</label>
+<div ng-if="zm.currentRankConstruction(upgrade) &lt; upgrade.cap">
+<label>Total Cost: </label>
+<label class="energy" ng-if="upgrade.costs.energy">{{upgrade.costs.energy|whole}} energy ({{upgrade.costs.energy/upgrade.time|whole}} per sec)</label>
+<label class="blood" ng-if="upgrade.costs.blood">{{upgrade.costs.blood|whole}} blood ({{upgrade.costs.blood/upgrade.time|whole}} per sec)</label>
+<label class="brains" ng-if="upgrade.costs.brains">{{upgrade.costs.brains|whole}} brains ({{upgrade.costs.brains/upgrade.time|whole}} per sec)</label>
+<label class="bones" ng-if="upgrade.costs.bones">{{upgrade.costs.bones|whole}} bones ({{upgrade.costs.bones/upgrade.time|whole}} per sec)</label>
+<label class="parts" ng-if="upgrade.costs.parts">{{upgrade.costs.parts|whole}} parts ({{upgrade.costs.parts/upgrade.time|whole}} per sec)</label>
+</div>
+<label ng-if="zm.constructionLeadsTo(upgrade)">Required for: {{zm.constructionLeadsTo(upgrade)}}</label>
+<p ng-if="zm.currentRankConstruction(upgrade) &lt; upgrade.cap">Current Rank: {{zm.currentRankConstruction(upgrade)}} / {{upgrade.cap}}</p>
+<button ng-click="zm.startConstruction(upgrade);" ng-disabled="zm.model.persistentData.currentConstruction" ng-if="zm.currentRankConstruction(upgrade) &lt; upgrade.cap">Begin Construction</button>
+</div>
+</div>
+</div>

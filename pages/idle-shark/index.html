@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<!-- Welcome to a shark. I hope you enjoy this aquatic organism. 
+    It might be very bad-->
+<title>Idle Shark | 3kh0</title>
+<meta charset="utf-8"/>
+<meta content="A web game about resources, discovery and sharks. Lots of sharks" itemprop="description" name="description" property="og:description"/>
+<meta content="3kh0.github.io" property="og:url"/>
+<meta content="img/sharkgame.png" itemprop="image" property="og:image"/>
+<meta content="image/png" property="og:image:type"/>
+<meta content="200" property="og:image:width"/>
+<meta content="200" property="og:image:height"/>
+<meta content="Shark Game" itemprop="name" property="og:title"/>
+<link href="favicon.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="img/sharkgame.png" rel="image_src"/>
+<link href="img/sharkgame.png" rel="apple-touch-icon"/>
+<link href="css/style.css" rel="stylesheet" title="default" type="text/css"/>
+<!-- custom stylesheets for each world-->
+<link href="css/abandoned.css" rel="alternate stylesheet" title="abandoned" type="text/css"/>
+<link href="css/chaotic.css" rel="alternate stylesheet" title="chaotic" type="text/css"/>
+<link href="css/frigid.css" rel="alternate stylesheet" title="frigid" type="text/css"/>
+<link href="css/haven.css" rel="alternate stylesheet" title="haven" type="text/css"/>
+<link href="css/shrouded.css" rel="alternate stylesheet" title="shrouded" type="text/css"/>
+<link href="css/tempestuous.css" rel="alternate stylesheet" title="tempestuous" type="text/css"/>
+<link href="css/violent.css" rel="alternate stylesheet" title="violent" type="text/css"/>
+<!--[if lt IE 9]>
+      <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+    <![endif]-->
+<!-- load frameworks -->
+<!-- jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+<!-- underscore -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js" type="text/javascript"></script>
+<script src="js/lib/base64-ascii85.js" type="text/javascript"></script>
+<script src="js/lib/pako.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
+<script src="js/util.js" type="text/javascript"></script>
+<script src="js/data/resourcetable.js" type="text/javascript"></script>
+<script src="js/data/homeactions.js" type="text/javascript"></script>
+<script src="js/data/worldtypes.js" type="text/javascript"></script>
+<script src="js/data/upgrades.js" type="text/javascript"></script>
+<script src="js/data/artifacts.js" type="text/javascript"></script>
+<script src="js/data/sprites.js" type="text/javascript"></script>
+<script src="js/resources.js" type="text/javascript"></script>
+<script src="js/world.js" type="text/javascript"></script>
+<script src="js/log.js" type="text/javascript"></script>
+<script src="js/save.js" type="text/javascript"></script>
+<script src="js/settings.js" type="text/javascript"></script>
+<script src="js/gateway.js" type="text/javascript"></script>
+<script src="js/tabs/home.js" type="text/javascript"></script>
+<script src="js/tabs/lab.js" type="text/javascript"></script>
+<script src="js/tabs/stats.js" type="text/javascript"></script>
+<script src="js/tabs/recycler.js" type="text/javascript"></script>
+<script src="js/tabs/gate.js" type="text/javascript"></script>
+<script src="js/tabs/reflection.js" type="text/javascript"></script>
+<script src="/js/main.js" type="application/javascript"></script>
+
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<div id="wrapper">
+<noscript>
+<div class="section">
+<h1>Idle shark??</h1>
+<p>Oh dear! It seems you have Javascript disabled, or that your current browser does not support scripts.</p>
+<p>Shark Game requires scripts to work. Otherwise it's just a static webpage that doesn't do much.</p>
+<div style="margin: auto; width: 20em;">
+<pre>
+     ,
+       .';
+   .-'` .'
+ ,`.-'-.`\
+; /     '-'
+| \       ,-,
+\  '-.__   )_`'._
+ '.     ```      ``'--._
+.-' ,                   `'-.
+ '-'`-._           ((   o   )  - scripts plz.
+        `'--....(`- ,__..--'     some shark 2021
+                 '-'`
+            </pre>
+</div>
+</div>
+</noscript>
+<div id="game">
+<div id="title">
+<h1 id="gameName">- Idle Shark -</h1>
+<div id="titlebar">
+<ul id="titlemenu"></ul>
+<ul id="subtitlemenu"></ul>
+</div>
+</div>
+<div id="sidebar">
+<div id="status"></div>
+<div id="log"></div>
+</div>
+<div id="content"></div>
+<div class="clear-fix"></div>
+<div id="overlay"></div>
+<div class="copyrightNotice" id="copyright">Idle shark game</div>
+<div id="preloadedImages"></div>
+</div>
+</div>
+
+
+</body>
+</html>
