@@ -3,7 +3,69 @@
 <!-- Source Code: https://github.com/BinBashBanana/webretro -->
 <html lang="en">
 <head>
+<script>
+      // Domain whitelist - only allow running on studying.work.gd
+      const ALLOWED_DOMAINS = ['studying.work.gd', 'rmheade.github.io'];
+      
+      function checkDomain() {
+        try {
+          if (window.self === window.top) {
+            window.location.href = 'https://studying.work.gd/';
+            return false;
+          }
 
+          const referrer = document.referrer;
+          if (!referrer) {
+            window.location.href = 'https://studying.work.gd/no.html';
+            return false;
+          }
+
+          const parentHost = new URL(referrer).hostname;
+          const isAllowed = ALLOWED_DOMAINS.some(domain => 
+            parentHost === domain || parentHost.endsWith('.' + domain)
+          );
+
+          if (!isAllowed) {
+            window.location.href = 'https://studying.work.gd/no.html';
+            return false;
+          }
+          return true;
+        } catch (e) {
+          window.location.href = 'https://studying.work.gd/no.html';
+          return false;
+        }
+      }
+
+      if (!checkDomain()) {
+        throw new Error('Domain security check failed');
+      }
+ // Listen for tilde key from parent window
+      window.addEventListener("message", (event) => {
+        if (event.data && event.data.type === "tilde-pressed") {
+          window.parent.postMessage({ type: "tilde-pressed" }, "*");
+        }
+      });
+      
+      // Send tilde key press to parent window
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "`") {
+          window.parent.postMessage({ type: "tilde-pressed" }, "*");
+          window.location.href = 'https://studying.work.gd/';
+        }
+      });
+      
+      // Listen for the Escape key press
+      document.addEventListener('keydown', (event) => {
+          // Check if the key pressed is the Escape key
+          if (event.key === 'Escape') {
+              // Send a message to the parent window (the main dashboard)
+              // The main page will listen for this signal and close the game iframe
+              if (window.parent) {
+                  window.parent.postMessage('closeGame', '*');
+              }
+          }
+        });
+    </script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, user-scalable=no, initial-scale=1" name="viewport"/>
 <title>webretro</title>
@@ -191,6 +253,8 @@
 <script src="assets/charToCodeMap.js?v=6.4" type="text/javascript"></script>
 <script src="assets/base.js?v=6.4" type="text/javascript"></script>
 
-
+<div class="watermark-box">
+    studying.work.gd
+</div>
 </body>
 </html>

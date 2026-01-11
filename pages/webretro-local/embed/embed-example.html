@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<script>
+      // Domain whitelist - only allow running on studying.work.gd
+      const ALLOWED_DOMAINS = ['studying.work.gd', 'rmheade.github.io'];
+      
+      function checkDomain() {
+        try {
+          if (window.self === window.top) {
+            window.location.href = 'https://studying.work.gd/';
+            return false;
+          }
+
+          const referrer = document.referrer;
+          if (!referrer) {
+            window.location.href = 'https://studying.work.gd/no.html';
+            return false;
+          }
+
+          const parentHost = new URL(referrer).hostname;
+          const isAllowed = ALLOWED_DOMAINS.some(domain => 
+            parentHost === domain || parentHost.endsWith('.' + domain)
+          );
+
+          if (!isAllowed) {
+            window.location.href = 'https://studying.work.gd/no.html';
+            return false;
+          }
+          return true;
+        } catch (e) {
+          window.location.href = 'https://studying.work.gd/no.html';
+          return false;
+        }
+      }
+
+      if (!checkDomain()) {
+        throw new Error('Domain security check failed');
+      }
+ // Listen for tilde key from parent window
+      window.addEventListener("message", (event) => {
+        if (event.data && event.data.type === "tilde-pressed") {
+          window.parent.postMessage({ type: "tilde-pressed" }, "*");
+        }
+      });
+      
+      // Send tilde key press to parent window
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "`") {
+          window.parent.postMessage({ type: "tilde-pressed" }, "*");
+          window.location.href = 'https://studying.work.gd/';
+        }
+      });
+      
+      // Listen for the Escape key press
+      document.addEventListener('keydown', (event) => {
+          // Check if the key pressed is the Escape key
+          if (event.key === 'Escape') {
+              // Send a message to the parent window (the main dashboard)
+              // The main page will listen for this signal and close the game iframe
+              if (window.parent) {
+                  window.parent.postMessage('closeGame', '*');
+              }
+          }
+        });
+    </script>
+<meta charset="utf-8"/>
+<title>Example webretro embed</title>
+<style>
+			#webretro-container {
+				width: 800px;
+				height: 600px;
+			}
+		</style>
+
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<h1>Example webretro embed</h1>
+<div id="webretro-container"></div>
+<br/>
+<a href="roms/LICENSE.txt">License for the example game "2048"</a>
+<script src="embed.js" type="text/javascript"></script>
+<script>
+			webretroEmbed(document.getElementById("webretro-container"), "../", {system: "nes", rom: "2048.nes"});
+		</script>
+
+<div class="watermark-box">
+    studying.work.gd
+</div>
+</body>
+</html>

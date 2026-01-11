@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<script>
+      // Domain whitelist - only allow running on studying.work.gd
+      const ALLOWED_DOMAINS = ['studying.work.gd', 'rmheade.github.io'];
+      
+      function checkDomain() {
+        try {
+          if (window.self === window.top) {
+            window.location.href = 'https://studying.work.gd/';
+            return false;
+          }
+
+          const referrer = document.referrer;
+          if (!referrer) {
+            window.location.href = 'https://studying.work.gd/no.html';
+            return false;
+          }
+
+          const parentHost = new URL(referrer).hostname;
+          const isAllowed = ALLOWED_DOMAINS.some(domain => 
+            parentHost === domain || parentHost.endsWith('.' + domain)
+          );
+
+          if (!isAllowed) {
+            window.location.href = 'https://studying.work.gd/no.html';
+            return false;
+          }
+          return true;
+        } catch (e) {
+          window.location.href = 'https://studying.work.gd/no.html';
+          return false;
+        }
+      }
+
+      if (!checkDomain()) {
+        throw new Error('Domain security check failed');
+      }
+ // Listen for tilde key from parent window
+      window.addEventListener("message", (event) => {
+        if (event.data && event.data.type === "tilde-pressed") {
+          window.parent.postMessage({ type: "tilde-pressed" }, "*");
+        }
+      });
+      
+      // Send tilde key press to parent window
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "`") {
+          window.parent.postMessage({ type: "tilde-pressed" }, "*");
+          window.location.href = 'https://studying.work.gd/';
+        }
+      });
+      
+      // Listen for the Escape key press
+      document.addEventListener('keydown', (event) => {
+          // Check if the key pressed is the Escape key
+          if (event.key === 'Escape') {
+              // Send a message to the parent window (the main dashboard)
+              // The main page will listen for this signal and close the game iframe
+              if (window.parent) {
+                  window.parent.postMessage('closeGame', '*');
+              }
+          }
+        });
+    </script>
+<meta charset="utf-8"/>
+<title>Cookie Policy | webretro</title>
+<style>
+			body {
+				background-color: #101010;
+				color: white;
+				font-family: sans-serif;
+			}
+			
+			a {
+				color: #3ec3f0;
+			}
+		</style>
+
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<a href="privacy.html">Privacy Policy</a>
+<a href="tos.html">Terms and Conditions</a>
+<h1>Cookie policy</h1>
+<p>This cookie policy ("Policy") describes what cookies are and how and they're being used by the <a href="https://binbashbanana.github.io/webretro" rel="nofollow" target="_blank">binbashbanana.github.io/webretro</a> website ("Website" or "Service") and any of its related products and services (collectively, "Services"). This Policy is a legally binding agreement between you ("User", "you" or "your") and this Website operator ("Operator", "we", "us" or "our"). You should read this Policy so you can understand the types of cookies we use, the information we collect using cookies and how that information is used. It also describes the choices available to you regarding accepting or declining the use of cookies. For further information on how we use, store and keep your personal data secure, see our <a href="http://privacy.html" rel="nofollow" target="_blank">privacy policy</a>.</p>
+<h2>What are cookies?</h2>
+<p>Cookies are small pieces of data stored in text files that are saved on your computer or other devices when websites are loaded in a browser. They are widely used to remember you and your preferences, either for a single visit (through a "session cookie") or for multiple repeat visits (using a "persistent cookie").</p>
+<p>Session cookies are temporary cookies that are used during the course of your visit to the Website, and they expire when you close the web browser.</p>
+<p>Persistent cookies are used to remember your preferences within our Website and remain on your desktop or mobile device even after you close your browser or restart your computer. They ensure a consistent and efficient experience for you while visiting the Website and Services.</p>
+<p>Cookies may be set by the Website ("first-party cookies"), or by third parties, such as those who serve content or provide advertising or analytics services on the Website ("third party cookies"). These third parties can recognize you when you visit our website and also when you visit certain other websites. <a href="https://www.websitepolicies.com/blog/cookies" target="_blank">Click here</a> to learn more about cookies and how they work.</p>
+<h2>What type of cookies do we use?</h2>
+<h3>Functionality cookies</h3>
+<p>Functionality cookies let us operate the Website and Services in accordance with the choices you make. Your game progress will be saved to these cookies.</p>
+<h2>What are your cookie options?</h2>
+<p>If you don't like the idea of cookies, you can leave this site and not come back until you are ready to accept cookies.</p>
+<h2>Changes and amendments</h2>
+<p>We reserve the right to modify this Policy or its terms relating to the Website and Services at any time, effective upon posting of an updated version of this Policy on the Website. When we do, we will revise the updated date at the bottom of this page. Continued use of the Website and Services after any such changes shall constitute your consent to such changes.</p>
+<h2>Acceptance of this policy</h2>
+<p>You acknowledge that you have read this Policy and agree to all its terms and conditions. By accessing and using the Website and Services you agree to be bound by this Policy. If you do not agree to abide by the terms of this Policy, you are not authorized to access or use the Website and Services. This cookie policy was created with the <a href="https://www.websitepolicies.com/cookie-policy-generator" target="_blank">cookie policy generator</a>.</p>
+<h2>Contacting us</h2>
+<p>If you would like to contact us to understand more about this Policy or wish to contact us concerning any matter relating to our use of cookies, you may message me on discord: OlyB#9420.</p>
+<p>This document was last updated on April 24, 2021</p>
+
+<div class="watermark-box">
+    studying.work.gd
+</div>
+</body>
+</html>
