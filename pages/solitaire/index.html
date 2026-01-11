@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="lib/os-gui/layout.css" rel="stylesheet" type="text/css"/>
+<link href="lib/os-gui/windows-98.css" rel="stylesheet" type="text/css"/>
+<link href="src/solitaire.css" rel="stylesheet" type="text/css"/>
+<link href="img/solitaire-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="img/solitaire-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<title>Solitaire | 3kh0</title>
+
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<div class="solitaire inset-deep" id="js-solitaire">
+<div class="size-limit">
+<div class="upper" id="js-upper">
+<div class="deck__pile upper__spacer" id="js-deck-pile"></div>
+<div class="deck__deal upper__spacer" id="js-deck-deal"></div>
+<div class="upper__spacer"></div>
+</div>
+<div class="board-deck" id="js-board"></div>
+</div>
+</div>
+<script src="lib/jquery.min.js"></script>
+<script src="lib/os-gui/MenuBar.js"></script>
+<script src="lib/os-gui/$Window.js"></script>
+<script src="src/msgbox.js"></script>
+<script>defaultMessageBoxTitle = "Solitaire";</script>
+<script src="src/menus.js"></script>
+<script src="src/index.js"></script>
+<script src="/js/main.js" type="application/javascript"></script>
+
+
+</body>
+</html>
