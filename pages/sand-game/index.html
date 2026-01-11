@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+
+<link href="styles.css" media="screen" rel="stylesheet" type="text/css"/>
+<title>Sand Game | 3kh0</title>
+<meta content="sand, falling, game" name="keywords"/>
+<meta content="Project Sand: A modern version of the classic Hell of Sand Falling Game" name="description"/>
+<meta content="Project Sand" name="subject"/>
+<meta charset="utf-8"/>
+<meta content="notranslate" name="google"/>
+<link href="assets/favicon.ico" rel="icon" type="image/x-icon"/>
+<meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport"/>
+<script src="/js/main.js" type="application/javascript"></script>
+
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<div class="wrapper" id="gameWrapper">
+<div id="titleWrapper">
+<h1 class="title">Sand Game v1.2</h1>
+<div class="subheader">
+<div class="column-left">
+<a href="https://github.com/3kh0/" target="_blank">Source Code</a>
+</div>
+<div class="column-center">
+                        By: 3kh0 and retronbv
+                    </div>
+<div class="column-right">
+<a href="/">Website</a>
+</div>
+</div>
+</div>
+<br/>
+<canvas id="mainCanvas">Your browser doesn't support HTML5 canvas. :(</canvas>
+<div id="menuWrapper">
+<table id="elementTable"></table>
+<div class="optionsCol" id="optionsCol1">
+<div id="penSizeDiv">
+<label for="pensize">Pen Size</label>
+<select id="pensize"></select>
+</div>
+<div>
+<select class="spigotType" id="spigot1Type"></select>
+<select id="spigot1Size"></select>
+</div>
+<div>
+<select class="spigotType" id="spigot2Type"></select>
+<select id="spigot2Size"></select>
+</div>
+<div>
+<select class="spigotType" id="spigot3Type"></select>
+<select id="spigot3Size"></select>
+</div>
+<div>
+<select class="spigotType" id="spigot4Type"></select>
+<select id="spigot4Size"></select>
+</div>
+</div>
+<div class="optionsCol" id="optionsCol2">
+<div>
+<label for="overwriteCheckbox">Overwrite</label>
+<input id="overwriteCheckbox" type="checkbox"/>
+</div>
+<div id="speedSliderDiv">
+<label for="speedSlider">Speed</label>
+<input id="speedSlider" type="range"/>
+</div>
+<div class="optionButtonContainer">
+<input class="optionButton" id="saveButton" type="button" value="Save"/>
+<input class="optionButton" id="loadButton" type="button" value="Load"/>
+</div>
+<div class="optionButtonContainer" id="clearButtonDiv">
+<input class="optionButton" id="clearButton" type="button" value="Clear"/>
+</div>
+</div>
+<div id="fps-counter"></div>
+</div>
+</div>
+<br/>
+<script src="scripts/util.js" type="text/javascript"></script>
+<script src="scripts/canvasConfig.js" type="text/javascript"></script>
+<script src="scripts/cursor.js" type="text/javascript"></script>
+<script src="scripts/particles.js" type="text/javascript"></script>
+<script src="scripts/elements.js" type="text/javascript"></script>
+<script src="scripts/spigots.js" type="text/javascript"></script>
+<script src="scripts/menu.js" type="text/javascript"></script>
+<script src="scripts/game.js" type="text/javascript"></script>
+
+
+</body>
+</html>
