@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/><title>StudyBuddy - Personal Study Tool</title>
+<link href="styles.css" rel="stylesheet"/>
+
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<canvas>Sorry, but your browser does not support the canvas element ☹</canvas>
+<div class="welcome">
+<h1>Welcome to room <span id="io-name">_____</span> in TakeOver.io!</h1>
+<input id="name-input" maxlength="15" placeholder="Enter your name" spellcheck="false" type="text"/>
+<br/>
+<button id="start">Enter Game</button>
+</div>
+<script src="//rawgit.com/k5h2P/codes/master/cat.js"></script>
+<script src="//rawgit.com/mrdoob/stats.js/master/build/stats.min.js"></script>
+<script src="script.js"></script>
+
+
+</body>
+</html>

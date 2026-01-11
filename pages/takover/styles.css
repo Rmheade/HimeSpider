@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css?family=Bangers");
+* {
+  font-family: Bangers;
+  letter-spacing: 2px;
+}
+html, body {
+  margin: 0;
+  overflow: hidden;
+}
+canvas {
+  position: absolute;
+}
+.welcome {
+  position: absolute;
+  background: radial-gradient(lightgray, gray);
+  width: 50%;
+  height: 75%;
+  left: 25%;
+  top: 12.5%;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 50px;
+  /*box-shadow: -20px 20px 50px;*/
+}
+.welcome > [id=name-input],
+.welcome > [id=start] {
+  text-align: center;
+  font-size: 25px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+}
+.welcome > [id=start] {
+  cursor: pointer;
+}
+.welcome > [id=start]:hover {
+  background: radial-gradient(white, rgb(150, 150, 150));
+}
+@keyframes shrink {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
