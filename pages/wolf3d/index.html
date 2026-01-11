@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+
+<html lang="en-US">
+<head>
+
+<meta charset="utf-8"/>
+<meta content="no-cache" http-equiv="pragma">
+<meta content="max-age=0" http-equiv="cache-control"/>
+<meta content="no-cache" http-equiv="cache-control"/>
+<meta content="no-store" http-equiv="cache-control"/>
+<meta content="width=640, height=400, user-scalable=no" name="viewport"/>
+<link href="art/wolf3d.png" rel="icon"/>
+<title>Wolfenstein 3D | 3kh0</title>
+<link href="styles.css" rel="stylesheet"/>
+<script src="js/modernizr.custom.js"></script>
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/load.js"></script>
+</meta>
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<div id="main">
+<div id="title-screen"></div>
+<div id="menu">
+<div class="message confirm-newgame">
+<div class="box"></div>
+</div>
+<div class="menu main">
+<ul class="selector">
+<li class="newgame" data-submenu="episodes"><div class="button"></div></li>
+<li class="sound" data-submenu="sound"><div class="button"></div></li>
+<li class="control" data-submenu="control"><div class="button"></div></li>
+<li class="readthis"><div class="button"></div></li>
+<li class="resumegame"><div class="button"></div></li>
+</ul>
+</div>
+<div class="menu sound" data-backmenu="main">
+<ul class="selector">
+<li class="sfxon"><div class="button"><div class="light"></div></div></li>
+<li class="sfxoff"><div class="button"><div class="light"></div></div></li>
+<li class="musicon"><div class="button"><div class="light"></div></div></li>
+<li class="musicoff"><div class="button"><div class="light"></div></div></li>
+</ul>
+</div>
+<div class="menu control" data-backmenu="main">
+<ul class="selector">
+<li class="mouseenabled"><div class="button"><div class="light"></div></div></li>
+<li class="customize" data-submenu="customize"><div class="button"></div></li>
+</ul>
+</div>
+<div class="menu customize" data-backmenu="control">
+<ul class="selector">
+<li class="customizekeys line1"><div class="button">
+<span class="k1 run" data-action="run"></span>
+<span class="k2 use" data-action="use"></span>
+<span class="k3 attack" data-action="attack"></span>
+<span class="k4 strafe" data-action="strafe"></span>
+</div></li>
+<li class="customizekeys line1"><div class="button">
+<span class="k1 left" data-action="left"></span>
+<span class="k2 right" data-action="right"></span>
+<span class="k3 up" data-action="up"></span>
+<span class="k4 down" data-action="down"></span>
+</div></li>
+</ul>
+</div>
+<div class="menu skill" data-backmenu="episodes">
+<div class="face"></div>
+<ul class="selector">
+<li class="baby" data-skill="gd_baby" data-submenu="levels"><div class="button"></div></li>
+<li class="easy" data-skill="gd_easy" data-submenu="levels"><div class="button"></div></li>
+<li class="medium" data-skill="gd_medium" data-submenu="levels"><div class="button"></div></li>
+<li class="hard" data-skill="gd_hard" data-submenu="levels"><div class="button"></div></li>
+</ul>
+</div>
+<div class="menu episodes" data-backmenu="main">
+<ul>
+<li class="episode-0" data-episode="0"><div class="button"></div></li>
+<li class="episode-1" data-episode="1"><div class="button"></div></li>
+<li class="episode-2" data-episode="2"><div class="button"></div></li>
+</ul>
+</div>
+<div class="menu levels" data-backmenu="skill">
+<ul class="two-column selector">
+<li class="level-0" data-level="0"><div class="button"></div></li>
+<li class="level-1" data-level="1"><div class="button"></div></li>
+<li class="level-2" data-level="2"><div class="button"></div></li>
+<li class="level-3" data-level="3"><div class="button"></div></li>
+<li class="level-4" data-level="4"><div class="button"></div></li>
+</ul>
+<ul class="two-column selector">
+<li class="level-5" data-level="5"><div class="button"></div></li>
+<li class="level-6" data-level="6"><div class="button"></div></li>
+<li class="level-7" data-level="7"><div class="button"></div></li>
+<li class="level-8" data-level="8"><div class="button"></div></li>
+<li class="level-9" data-level="9"><div class="button"></div></li>
+</ul>
+</div>
+</div>
+<div id="text-screen"></div>
+<div id="game">
+<div class="fps"></div>
+<div class="renderer">
+<div class="ceiling"></div>
+<div class="floor"></div>
+<div class="player-weapon"></div>
+<div class="damage-flash overlay"></div>
+<div class="bonus-flash overlay"></div>
+<div class="death overlay"></div>
+<div class="pause overlay"><img alt="" src="art/paused.png"/></div>
+</div>
+<div class="loading"><img alt="" src="art/getpsyched.png"/></div>
+<div class="gameover"></div>
+<div class="intermission">
+<div class="background"></div>
+<div class="background-secret"></div>
+<div class="background-victory"></div>
+<div class="bj"></div>
+<div class="floor stat">
+<div class="digit"></div>
+<div class="digit"></div>
+</div>
+<div class="bonus stat">
+<div class="digit"></div>
+<div class="digit"></div>
+<div class="digit"></div>
+<div class="digit"></div>
+<div class="digit"></div>
+<div class="digit"></div>
+</div>
+<div class="total-time-minutes victory-stat">
+<div class="digit"></div><div class="digit"></div>
+</div>
+<div class="total-time-seconds victory-stat">
+<div class="digit"></div><div class="digit"></div>
+</div>
+<div class="time-minutes stat">
+<div class="digit"></div>
+<div class="digit"></div>
+</div>
+<div class="time-seconds stat">
+<div class="digit"></div>
+<div class="digit"></div>
+</div>
+<div class="par-minutes stat">
+<div class="digit"></div>
+<div class="digit"></div>
+</div>
+<div class="par-seconds stat">
+<div class="digit"></div>
+<div class="digit"></div>
+</div>
+<div class="kill-ratio stat">
+<div class="digit"></div>
+<div class="digit"></div>
+<div class="digit"></div>
+</div>
+<div class="secret-ratio stat">
+<div class="digit"></div>
+<div class="digit"></div>
+<div class="digit"></div>
+</div>
+<div class="treasure-ratio stat">
+<div class="digit"></div>
+<div class="digit"></div>
+<div class="digit"></div>
+</div>
+<div class="avg-kill-ratio victory-stat">
+<div class="digit"></div><div class="digit"></div><div class="digit"></div>
+</div>
+<div class="avg-secret-ratio victory-stat">
+<div class="digit"></div><div class="digit"></div><div class="digit"></div>
+</div>
+<div class="avg-treasure-ratio victory-stat">
+<div class="digit"></div><div class="digit"></div><div class="digit"></div>
+</div>
+</div>
+<div class="hud">
+<div class="floor number-container">
+<div class="number"></div>
+</div>
+<div class="score number-container">
+<div class="number"></div><div class="number"></div><div class="number"></div><div class="number"></div><div class="number"></div><div class="number"></div>
+</div>
+<div class="lives number-container">
+<div class="number"></div>
+</div>
+<div class="health number-container">
+<div class="number"></div><div class="number"></div><div class="number"></div>
+</div>
+<div class="ammo number-container">
+<div class="number"></div><div class="number"></div>
+</div>
+<div class="key1"></div>
+<div class="key2"></div>
+<div class="bj"></div>
+<div class="weapon"></div>
+</div>
+</div>
+</div>
+
+
+</body>
+</html>

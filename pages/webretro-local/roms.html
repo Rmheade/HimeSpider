@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<script>
+      // Domain whitelist - only allow running on studying.work.gd
+      const ALLOWED_DOMAINS = ['studying.work.gd', 'rmheade.github.io'];
+      
+      function checkDomain() {
+        try {
+          if (window.self === window.top) {
+            window.location.href = 'https://studying.work.gd/';
+            return false;
+          }
+
+          const referrer = document.referrer;
+          if (!referrer) {
+            window.location.href = 'https://studying.work.gd/no.html';
+            return false;
+          }
+
+          const parentHost = new URL(referrer).hostname;
+          const isAllowed = ALLOWED_DOMAINS.some(domain => 
+            parentHost === domain || parentHost.endsWith('.' + domain)
+          );
+
+          if (!isAllowed) {
+            window.location.href = 'https://studying.work.gd/no.html';
+            return false;
+          }
+          return true;
+        } catch (e) {
+          window.location.href = 'https://studying.work.gd/no.html';
+          return false;
+        }
+      }
+
+      if (!checkDomain()) {
+        throw new Error('Domain security check failed');
+      }
+ // Listen for tilde key from parent window
+      window.addEventListener("message", (event) => {
+        if (event.data && event.data.type === "tilde-pressed") {
+          window.parent.postMessage({ type: "tilde-pressed" }, "*");
+        }
+      });
+      
+      // Send tilde key press to parent window
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "`") {
+          window.parent.postMessage({ type: "tilde-pressed" }, "*");
+          window.location.href = 'https://studying.work.gd/';
+        }
+      });
+      
+      // Listen for the Escape key press
+      document.addEventListener('keydown', (event) => {
+          // Check if the key pressed is the Escape key
+          if (event.key === 'Escape') {
+              // Send a message to the parent window (the main dashboard)
+              // The main page will listen for this signal and close the game iframe
+              if (window.parent) {
+                  window.parent.postMessage('closeGame', '*');
+              }
+          }
+        });
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width" name="viewport"/>
+<meta content="me when embed" name="description"/>
+<meta content="3kh0, surely" name="author"/>
+<title>select a rom...</title>
+<link href="/favicon.ico" rel="icon"/>
+
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<style type="text/css">
+    html {
+      background: black;
+      color: white;
+      font-family: sans-serif;
+    }
+  
+    .items > .rom > a {
+      text-align: center;
+      color: white;
+      text-decoration: none;
+    }
+
+    .items > .rom > a:hover {
+      text-decoration: underline;
+    }
+    
+    .items > .rom > a:hover { /* 👀 */
+      font-size: 6969px;
+      transition: 2323s;
+    }
+    
+    .items {
+      border-radius:10px;
+      display:flex;
+      flex-flow:row wrap;
+      gap:12px;
+      justify-content:center;
+      margin-top:10px;
+      padding:10px;
+      width:100%;
+    }
+    
+    .image {
+      opacity: 0.69;
+      display: block;
+      width: 150px;
+      height: auto;
+      border-radius: 6.9%;
+      transition: .5s ease;
+      backface-visibility: hidden;
+    }
+    
+    .rom:hover .image {
+      opacity: 1;
+    }
+    
+    .text {
+      background-color: #666666;
+      color: white;
+      font-size: 16px;
+      padding: 16px 32px;
+    }
+
+    .rom {
+      width: 10rem;
+    }
+  </style>
+<div class="items">
+<!-- TEMPLATE (anything in CAPS is a placeholder)
+    <div class="rom">
+      <a href="./index.html?core=autodetect&rom=ROM_FILE_NAME">
+          <img alt="TITLE" loading="lazy" data-loaded="1" class="image" src="./thumb/THUMBNAIL">
+          <p>
+            TITLE
+          </p>
+      </a>
+    </div>
+    -->
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=world.smc">
+<img alt="Super Mario World" class="image" data-loaded="1" loading="lazy" src="./thumb/super-mario-world.jpg"/>
+<p>
+            Super Mario World
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=earthbound.sfc">
+<img alt="Earthbound" class="image" data-loaded="1" loading="lazy" src="./thumb/earthbound.jpg"/>
+<p>
+            Earthbound
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=finalfantasy.nes">
+<img alt="Final Fantasy (#1, NES)" class="image" data-loaded="1" loading="lazy" src="./thumb/finalfantasy.webp"/>
+<p>
+            Final Fantasy (#1, NES)
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=linktothepast.smc">
+<img alt="The Legend of Zelda - A Link to the Past" class="image" data-loaded="1" loading="lazy" src="./thumb/linktothepast.jpg"/>
+<p>
+            The Legend of Zelda - A Link to the Past
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=mario.nes">
+<img alt="Super Mario Bros (the original!)" class="image" data-loaded="1" loading="lazy" src="./thumb/mario.jpg"/>
+<p>
+            Super Mario Bros
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=metroid.sfc">
+<img alt="Super Metroid" class="image" data-loaded="1" loading="lazy" src="./thumb/supermetroid.jpg"/>
+<p>
+            Super Metroid
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=mother.nes">
+<img alt="Earthbound Zero (Mother 1)" class="image" data-loaded="1" loading="lazy" src="./thumb/mother.jpg"/>
+<p>
+            Earthbound Zero (Mother 1)
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=smk.smc">
+<img alt="Super Mario Kart" class="image" data-loaded="1" loading="lazy" src="./thumb/smk.jpg"/>
+<p>
+            Super Mario Kart
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=smrpg.smc">
+<img alt="geno for smash 🔫" class="image" data-loaded="1" loading="lazy" src="./thumb/smrpg.webp"/>
+<p>
+            Super Mario RPG
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=sonic-advance.gba">
+<img alt="Sonic Advance (GBA)" class="image" data-loaded="1" loading="lazy" src="./thumb/sonic-advance.jpg"/>
+<p>
+            Sonic Advance (GBA)
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=superstar-saga.gba">
+<img alt="Mario &amp; Luigi - Superstar Saga" class="image" data-loaded="1" loading="lazy" src="./thumb/superstar-saga.jpg"/>
+<p>
+            Mario &amp; Luigi - Superstar Saga
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=warioland4.gba">
+<img alt="Wario Land 4" class="image" data-loaded="1" loading="lazy" src="./thumb/warioland4.png"/>
+<p>
+            Wario Land 4
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=kirbo.smc">
+<img alt="Kirby - Super Star" class="image" data-loaded="1" loading="lazy" src="./thumb/kirbo.jpg"/>
+<p>
+            Kirby - Super Star
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html?core=autodetect&amp;rom=https://webretro.ruralanemone.tech/roms/mother3.gba">
+<img alt="Mother 3 (no crying until the end)" class="image" data-loaded="1" loading="lazy" src="./thumb/mother3.png"/>
+<p>
+            Mother 3 (no crying until the end)
+          </p>
+</a>
+</div>
+<div class="rom">
+<a href="./index.html">
+<img alt="Upload your own ROM" class="image" data-loaded="1" loading="lazy" src="./thumb/richard.gif"/>
+<p>
+            Upload your own ROM
+          </p>
+</a>
+</div>
+</div>
+<script src="/js/main.js" type="application/javascript"></script>
+
+
+</body>
+</html>

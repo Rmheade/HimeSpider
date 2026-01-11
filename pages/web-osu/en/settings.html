@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<script>
+      // Domain whitelist - only allow running on studying.work.gd
+      const ALLOWED_DOMAINS = ['studying.work.gd', 'rmheade.github.io'];
+      
+      function checkDomain() {
+        try {
+          if (window.self === window.top) {
+            window.location.href = 'https://studying.work.gd/';
+            return false;
+          }
+
+          const referrer = document.referrer;
+          if (!referrer) {
+            window.location.href = 'https://studying.work.gd/no.html';
+            return false;
+          }
+
+          const parentHost = new URL(referrer).hostname;
+          const isAllowed = ALLOWED_DOMAINS.some(domain => 
+            parentHost === domain || parentHost.endsWith('.' + domain)
+          );
+
+          if (!isAllowed) {
+            window.location.href = 'https://studying.work.gd/no.html';
+            return false;
+          }
+          return true;
+        } catch (e) {
+          window.location.href = 'https://studying.work.gd/no.html';
+          return false;
+        }
+      }
+
+      if (!checkDomain()) {
+        throw new Error('Domain security check failed');
+      }
+ // Listen for tilde key from parent window
+      window.addEventListener("message", (event) => {
+        if (event.data && event.data.type === "tilde-pressed") {
+          window.parent.postMessage({ type: "tilde-pressed" }, "*");
+        }
+      });
+      
+      // Send tilde key press to parent window
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "`") {
+          window.parent.postMessage({ type: "tilde-pressed" }, "*");
+          window.location.href = 'https://studying.work.gd/';
+        }
+      });
+      
+      // Listen for the Escape key press
+      document.addEventListener('keydown', (event) => {
+          // Check if the key pressed is the Escape key
+          if (event.key === 'Escape') {
+              // Send a message to the parent window (the main dashboard)
+              // The main page will listen for this signal and close the game iframe
+              if (window.parent) {
+                  window.parent.postMessage('closeGame', '*');
+              }
+          }
+        });
+    </script>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/><meta charset="utf-8"/>
+<title>StudyBuddy - Personal Study Tool</title>
+<link href="style/main.css" rel="stylesheet" type="text/css"/>
+<link href="favicon.png" rel="icon"/>
+<script src="scripts/lib/localforage.min.js"></script>
+<script src="scripts/settings.js"></script>
+
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<div class="main-page" id="main-page">
+<div class="panel">
+<!-- <h1>Settings</h1> -->
+<table class="holder" id="settings-panel">
+<tr>
+<td>
+<h3>
+                                GAMEPLAY
+                            </h3>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Background dim
+                            </div>
+<div class="option-control">
+<input class="slider" id="dim-range" max="100" min="0" type="range" value="0"/>
+<div class="range-indicator" hidden="" id="dim-range-indicator"></div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Background blur
+                            </div>
+<div class="option-control">
+<input class="slider" id="blur-range" max="8" min="0" type="range" value="0"/>
+<div class="range-indicator" hidden="" id="blur-range-indicator"></div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Cursor size
+                            </div>
+<div class="option-control">
+<input class="slider" id="cursorsize-range" max="2.0" min="0.5" step="0.01" type="range" value="0.5"/>
+<div class="range-indicator" hidden="" id="cursorsize-range-indicator"></div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name" title="less latency, but on some browsers donesn't display correctly">
+                                Show hardware cursor
+                            </div>
+<div class="option-control">
+<input id="showhwmouse-check" type="checkbox"><span></span>
+</input></div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Snaking in sliders
+                            </div>
+<div class="option-control">
+<input id="snakein-check" type="checkbox"><span></span>
+</input></div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Snaking out sliders
+                            </div>
+<div class="option-control">
+<input id="snakeout-check" type="checkbox"><span></span>
+</input></div>
+</td>
+</tr>
+<tr>
+<td>
+<h3>
+                                INPUT
+                            </h3>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name" title="So that you don't change volume accidentally">
+                                Disable mouse wheel in gameplay
+                            </div>
+<div class="option-control">
+<input id="disable-wheel-check" type="checkbox"/><span></span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name" title="So that you don't hit things accidentally">
+                                Disable mouse buttons in gameplay
+                            </div>
+<div class="option-control">
+<input id="disable-button-check" type="checkbox"/><span></span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Left button
+                            </div>
+<div class="option-control">
+<input id="lbutton1select" type="button" value="oops"/>
+<input type="button" value="M1"/>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Right button
+                            </div>
+<div class="option-control">
+<input id="rbutton1select" type="button" value="oops"/>
+<input type="button" value="M2"/>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<h3>
+                                AUDIO
+                            </h3>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Master volume
+                            </div>
+<div class="option-control">
+<input class="slider" id="mastervolume-range" max="100" min="0" type="range" value="0"/>
+<div class="range-indicator" hidden="" id="mastervolume-range-indicator"></div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Effect volume
+                            </div>
+<div class="option-control">
+<input class="slider" id="effectvolume-range" max="100" min="0" type="range" value="0"/>
+<div class="range-indicator" hidden="" id="effectvolume-range-indicator"></div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Music volume
+                            </div>
+<div class="option-control">
+<input class="slider" id="musicvolume-range" max="100" min="0" type="range" value="0"/>
+<div class="range-indicator" hidden="" id="musicvolume-range-indicator"></div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name disabled">
+                                Audio offset
+                            </div>
+<div class="option-control">
+<input class="slider" id="audiooffset-range" max="80" min="-80" type="range" value="-80"/>
+<div class="range-indicator" hidden="" id="audiooffset-range-indicator"></div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name disabled">
+                                Enable beatmap hitsounds
+                            </div>
+<div class="option-control">
+<input id="beatmap-hitsound-check" type="checkbox"><span></span>
+</input></div>
+</td>
+</tr>
+<tr>
+<td>
+<h3>
+                                MODS
+                            </h3>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name" title="This doesn't make things easier!">
+                                Easy
+                            </div>
+<div class="option-control">
+<input id="easy-check" type="checkbox"><span></span>
+</input></div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name" title="Everything gets slower...">
+                                Daycore
+                            </div>
+<div class="option-control">
+<input id="daycore-check" type="checkbox"><span></span>
+</input></div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name" title="Everything gets a bit harder...">
+                                Hard Rock
+                            </div>
+<div class="option-control">
+<input id="hardrock-check" type="checkbox"><span></span>
+</input></div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name" title="Play with no approach circles and fading circles/sliders">
+                                Hidden
+                            </div>
+<div class="option-control">
+<input id="hidden-check" type="checkbox"/><span></span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name" title="Everything gets faster...">
+                                Nightcore
+                            </div>
+<div class="option-control">
+<input id="nightcore-check" type="checkbox"/><span></span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name" title="Watch a perfect automated play">
+                                Autoplay
+                            </div>
+<div class="option-control">
+<input id="autoplay-check" type="checkbox"/><span></span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<h3>
+                                SKIN
+                            </h3>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Don't show hit circle numbers
+                            </div>
+<div class="option-control">
+<input id="hidenumbers-check" type="checkbox"/><span></span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Don't show "Great" (300s)
+                            </div>
+<div class="option-control">
+<input id="hidegreat-check" type="checkbox"/><span></span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="option-name">
+                                Don't show follow points
+                            </div>
+<div class="option-control">
+<input id="hidefollowpoints-check" type="checkbox"/><span></span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<br/>
+<input class="warnbtn" id="restoredefault-btn" type="button" value="Restore all settings to default"/>
+</td>
+</tr>
+</table>
+</div>
+</div>
+
+<div class="watermark-box">
+    studying.work.gd
+</div>
+</body>
+</html>
