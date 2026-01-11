@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+<head>
+
+<meta charset="utf-8"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Unity WebGL Player | Grey-Box Testing</title>
+<link href="TemplateData/favicon.ico" rel="shortcut icon"/>
+<link href="TemplateData/style.css" rel="stylesheet"/>
+<script src="TemplateData/UnityProgress.js"></script>
+<script src="Build/UnityLoader.js"></script>
+<script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/v0_1_5.json", {onProgress: UnityProgress});
+    </script>
+
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<div class="webgl-content">
+<div id="unityContainer" style="width: 960px; height: 600px"></div>
+<div class="footer">
+<div class="webgl-logo"></div>
+<div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+<!--<div class="title">Grey-Box Testing</div>-->
+</div>
+</div>
+
+
+</body>
+<script>
+  // Prevent itch.io hotlink detection
+  if (window.location !== window.parent.location) {
+    // We're in an iframe, block any redirect attempts
+    window.addEventListener('beforeunload', function(e) {
+      if (window.location.href.includes('embed-hotlink')) {
+        e.preventDefault();
+        return false;
+      }
+    });
+  }
+</script>
+</html>
