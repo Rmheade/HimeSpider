@@ -1993,5 +1993,13 @@ const baseGames = [
  description: "Play Clash Royale and other mobile games on this website",
  controls: "Varies",
  category: "Other"
-}
+},
+{
+    name: "PokeRouge",
+    url: "pages/pokerouge/index.html",
+    image: "pages/pokerouge/pr.jpg",
+    description: "PokéRogue is a browser based Pokémon fangame heavily inspired by the roguelite genre. Battle endlessly while gathering stacking items, exploring many different biomes, and reaching Pokémon stats you never thought possible.",
+    controls: "Space/Enter/Z to Select, Backspace/X to cancel, Esc/M to close game menu, C/Shift to see stats, V to see moves, WASD to change selected",
+    category: "RPG"
+},
 ];
