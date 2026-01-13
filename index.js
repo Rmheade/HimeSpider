@@ -6,7 +6,8 @@
 const searchBar = document.getElementById("search")
 const gridTemp = document.querySelector("[temp]")
 const gridContainer = document.getElementById("items")
-const gameTemp = document.querySelector("[temp2]")
+
+let searchValue = ""
 
 let itemList = []
 
@@ -14,51 +15,12 @@ let favs = []
 
 let favtoggle = false
 
-if (localStorage.getItem("favs")){
-	favs = JSON.parse(localStorage.getItem("favs"))
-}else {
-	favs = []
-}
-
-searchBar.addEventListener("input", e => {
-  const value = e.target.value.toLowerCase()
-  itemList.forEach(item => {
-    const isVisible =
-      item.name.toLowerCase().includes(value)
-    item.element.classList.toggle("hide", !isVisible)
-  })
-})
-
+//Sorts the games alphebetically
 let sortedGames = [...baseGames].sort((a, b) =>
   a.name.localeCompare(b.name)
 )
 
-const render = () => {
-	gridContainer.innerHTML = ""
-	itemList = sortedGames.map(gridbox => {
-	  const gridTempp = gridTemp.content.cloneNode(true).children[0]
-	  const image = gridTempp.querySelector("[image]")
-	  const text = gridTempp.querySelector("[text]")
-	  const box = gridTempp.querySelector("[boxx]")
-	  const butt = gridTempp.querySelector("[butt]")
-	  image.src = gridbox.image
-	  gridTempp.setAttribute('onclick', `beep("${gridbox.url}")`);
-	  butt.addEventListener('click', (e) => {
-		  fav(gridbox.name, e)
-	  })
-
-	  const svg = butt.querySelector('svg');
-	  if (favs.includes(gridbox.name)){
-		svg.classList.add("selected")
-	  }else{
-		svg.classList.remove("selected")
-	  }
-	  text.innerHTML = gridbox.name.replace(/\\n/g, '<br>')
-	  gridContainer.append(gridTempp)
-	  return { name: gridbox.name, image: gridbox.image, element: gridTempp }
-	})
-};
-
+//This changes the sorting method between A-Z, Z-A, or Recent
 const changeSort = (selectedValue) => {
 	var selectBox = document.getElementById("sort");
 	localStorage.setItem('sort', selectedValue)
@@ -79,6 +41,85 @@ const changeSort = (selectedValue) => {
 	}
 };
 
+
+
+//This draws the games
+const render = () => {
+	gridContainer.innerHTML = ""
+	//This renders all of the grid boxes onto the screen
+	itemList = sortedGames.map(gridbox => {
+	  const gridTempp = gridTemp.content.cloneNode(true).children[0]
+	  const image = gridTempp.querySelector("[image]")
+	  const text = gridTempp.querySelector("[text]")
+	  const butt = gridTempp.querySelector("[butt]")
+	  image.src = gridbox.image
+	  gridTempp.setAttribute('onclick', `beep("${gridbox.url}")`);
+	  butt.addEventListener('click', (e) => {
+		  fav(gridbox.name, e)
+	  })
+
+	  //This determines if the heart is red or not
+	  const svg = butt.querySelector('svg');
+	  if (favs.includes(gridbox.name)){
+		svg.classList.add("selected")
+	  }else{
+		svg.classList.remove("selected")
+	  }
+	  text.innerHTML = gridbox.name.replace(/\\n/g, '<br>')
+	  gridContainer.append(gridTempp)
+	  
+
+	  //The rest will determine what shows and what doesn't.
+	  let isVisible = true
+
+	  if (searchValue && !gridbox.name.toLowerCase().includes(searchValue)){
+		isVisible = false
+	  }
+
+	  if (favtoggle){
+		isVisible = favs.includes(gridbox.name);
+	  }
+	 
+	  gridTempp.classList.toggle("hide", !isVisible)
+
+	  return { name: gridbox.name, image: gridbox.image, element: gridTempp }
+	})
+};
+
+//Detects the searchbar
+searchBar.addEventListener("input", e => {
+  searchValue = e.target.value.toLowerCase()
+  render()
+})
+
+//This allows the user to favorite
+const fav = (choicegame, e) => {
+	e.stopPropagation()
+	if (favs.includes(choicegame)){
+		favs.splice(favs.indexOf(choicegame), 1)
+		localStorage.setItem("favs", JSON.stringify(favs));
+	}else{
+		favs.push(choicegame)
+		localStorage.setItem("favs", JSON.stringify(favs));
+	}
+	render()
+}
+
+//This button only shows favorites
+const toggleFavorites = () => {
+	const heart  = document.getElementById("favheart")
+	if (favtoggle == false){
+		favtoggle = true
+		heart.classList.add("selected")
+	}else{
+		favtoggle = false
+		heart.classList.remove("selected")
+	}
+	render()
+}
+
+
+
 //sorry about the name, but I had to. This just fullscreens the game. It used to be more complicated, so it feels small now.
 const beep = (url) => {
 	game = document.querySelector("[game]");
@@ -93,49 +134,16 @@ document.addEventListener("fullscreenchange", () => {
   }
 });
 
+//Sets the favorites list upon load
+if (localStorage.getItem("favs")){
+	favs = JSON.parse(localStorage.getItem("favs"))
+}else {
+	favs = []
+}
+
+//This grabs what the most recent sort mode was on load
 if (localStorage.getItem('sort')){
 	changeSort(localStorage.getItem('sort'))
 }
-
-const fav = (choicegame, e) => {
-	e.stopPropagation()
-	if (favs.includes(choicegame)){
-		favs.splice(favs.indexOf(choicegame), 1)
-		localStorage.setItem("favs", JSON.stringify(favs));
-	}else{
-		favs.push(choicegame)
-		localStorage.setItem("favs", JSON.stringify(favs));
-	}
-	render()
-}
-
-const toggleFavorites = () => {
-	const heart  = document.getElementById("favheart")
-	if (favtoggle == false){
-		favtoggle = true
-		heart.classList.add("selected")
-		itemList.forEach(item => {
-		    const isVisible = favs.includes(item.name);
-		    item.element.classList.toggle("hide", !isVisible);
-		})
-	}else{
-		favtoggle = false
-		heart.classList.remove("selected")
-		itemList.forEach(item => {
-		    item.element.classList.remove("hide");
-		})
-	}
-}
-
-/*
-searchBar.addEventListener("input", e => {
-  const value = e.target.value.toLowerCase()
-  itemList.forEach(item => {
-    const isVisible =
-      item.name.toLowerCase().includes(value)
-    item.element.classList.toggle("hide", !isVisible)
-  })
-})
-*/
 
 render()
