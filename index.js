@@ -15,6 +15,7 @@ let favs = []
 
 let favtoggle = false
 
+
 //Sorts the games alphebetically
 let sortedGames = [...baseGames].sort((a, b) =>
   a.name.localeCompare(b.name)
@@ -53,7 +54,12 @@ const render = () => {
 	  const text = gridTempp.querySelector("[text]")
 	  const butt = gridTempp.querySelector("[butt]")
 	  image.src = gridbox.image
-	  gridTempp.setAttribute('onclick', `beep("${gridbox.url}")`);
+
+	  if (gridbox.isExternal){
+		gridTempp.setAttribute('onclick', 'window.open("'+ gridbox.url +'", "_blank").focus();')
+	  }else if(!gridbox.isExternal){
+	  	gridTempp.setAttribute('onclick', `beep("${gridbox.url}")`);
+	  }
 	  butt.addEventListener('click', (e) => {
 		  fav(gridbox.name, e)
 	  })

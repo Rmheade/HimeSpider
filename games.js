@@ -1,5 +1,5 @@
 const baseGames = [
-/*{
+{
     name: "Suggestions and Issues Form",
     url: "https://docs.google.com/forms/d/e/1FAIpQLSeog95fl57i1Jv28IUltDQdAHghnphJHIKCL3biTzReZtLXVA/viewform",
     image: "images/form.svg",
@@ -8,7 +8,16 @@ const baseGames = [
     category: "Other",
     isPriority: true,
     isExternal: true
-},*/
+},
+{
+ name: "Chat GPT",
+ url: "pages/gpt/index.html",
+ image: "pages/gpt/gpt.svg",
+ description: "A web-based interface to interact with the Chat GPT language model, allowing users to input prompts and receive AI-generated text responses in real-time." ,
+ controls: "Type your prompt into the text box and press Enter to submit",
+ category: "Other",
+ isPriority: true
+},
 {
  name: "Infinite Mario",
  url: "/pages/mario/main.html",
@@ -1897,15 +1906,6 @@ const baseGames = [
  controls: "Arrow Keys to move with frame-perfect timing required",
  category: "Strategy"
 },
-/*{
- name: "Chat GPT",
- url: "pages/gpt/index.html",
- image: "pages/gpt/gpt.svg",
- description: "A web-based interface to interact with the Chat GPT language model, allowing users to input prompts and receive AI-generated text responses in real-time." ,
- controls: "Type your prompt into the text box and press Enter to submit",
- category: "Other",
- isPriority2: true
-},*/
 {
  name: "Duck Life: Treasure Hunt",
  url: "pages/dlth/index.html",
