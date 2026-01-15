@@ -1998,8 +1998,24 @@ const baseGames = [
     name: "PokeRouge",
     url: "pages/pokerouge/index.html",
     image: "pages/pokerouge/pr.jpg",
-    description: "PokéRogue is a browser based Pokémon fangame heavily inspired by the roguelite genre. Battle endlessly while gathering stacking items, exploring many different biomes, and reaching Pokémon stats you never thought possible.",
-    controls: "Space/Enter/Z to Select, Backspace/X to cancel, Esc/M to close game menu, C/Shift to see stats, V to see moves, WASD to change selected",
-    category: "RPG"
+    description: "A rougelike pokemon game",
+    controls: "Mouse to aim launch angle, click to start, arrow keys during flight",
+    category: "Strategy"
 },
+{
+    name: "Learn to Fly 2",
+    url: "pages/learntofly2/index.html",
+    image: "pages/learntofly2/ltf2.jpeg",
+    description: "Learn to Fly 2 is a launcher game where you play as a penguin attempting to fly using a ramp and various gadgets.",
+    controls: "Mouse to aim launch angle, click to start, arrow keys during flight",
+    category: "Strategy"
+},
+{
+    name: "Learn to Fly 3",
+    url: "pages/learntofly3/index.html",
+    image: "pages/learntofly3/ltf3.png",
+    description: "Build your spaceship from scratch, earn funds and invest them into building a bigger, better spaceship as you try and fly your way up to space!",
+    controls: "Mouse to aim launch angle, click to start, arrow keys during flight",
+    category: "Strategy"
+}
 ];
