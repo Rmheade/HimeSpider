@@ -63,23 +63,7 @@
         filter: drop-shadow(0 0 4px rgba(221, 221, 221, 0.4));
       }
     }
-    #framee {
-      display: none;
-    }
-    #framee.shown {
-      position:fixed;
-      top:0;
-      left:0;
-      bottom:0;
-      right:0;
-      width:100%;
-      height:100%;
-      border:none;
-      margin:0;
-      padding:0;
-      overflow:hidden;
-      z-index:999999;
-    }
+
   </style>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -138,9 +122,33 @@
     </svg>
     </a>
   </div>
-  <script>
+    <script>
     function openGame() {
-      document.getElementById("framee").classList.add("shown");
+      const cacheBuster = 'games.html?v=' + new Date().getTime();
+
+      fetch(cacheBuster)
+        .then(response => response.text())
+        .then(html => {
+          const newWin = window.open('about:blank', '_blank');
+          
+          // We write the HTML directly. 
+          // This allows games.html to find its local CSS/JS files.
+          newWin.document.write(html);
+          
+          // We manually inject the Favicon into the new tab's head 
+          // using a Base64 string to force it to show up.
+          const link = newWin.document.createElement('link');
+          link.rel = 'icon';
+          link.type = 'image/x-icon';
+          // This is a Base64 string for a generic blue circle icon 
+          // (You can replace this with a Desmos-specific Base64 string)
+          link.href = 'data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgCCgYID/////4GBggIAAgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIAgoGCAf////+CgYICAAIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgCCgYIB/////4KBggIAAgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIAgoGCAf////+CgYICAAIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgCCgYIB/////4KBggIAAgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIAgoGCAf////+CgYICAAIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgCCgYIB/////4KBggIAAgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIAgoGCAf////+CgYICAAIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgCCgYIB/////4KBggIAAgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIAgoGCAf////+CgYICAAIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgCCgYIB/////4KBggIAAgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIAgoGCAf////+CgYICAAIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgCCgYIB/////4KBggIAAgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIAgoGCAf////+CgYICAAIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgCCgYIB/////4KBggIAAgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIAgoGCAf////+CgYICAAIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgCCgYIB/////4KBggIAAgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIAgoGCAf////+CgYICAAIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==';
+          
+          newWin.document.getElementsByTagName('head')[0].appendChild(link);
+          newWin.document.title = "Desmos | Graphing Calculator";
+          
+          newWin.document.close();
+        });
     }
   </script>
   <script>
@@ -157,8 +165,5 @@
     }, 500);
   });
   </script>
-  <iframe id="framee" src="games.html">
-    Your browser doesn't support iframes
-  </iframe>
 </body>
 </html>
