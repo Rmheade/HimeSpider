@@ -60,6 +60,7 @@ video{
 	font-family: Zaslia, sans-serif;
 	font-size: 5rem;
 	justify-self: center;
+	display: grid;
 }
 
 .menu{
