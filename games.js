@@ -2026,4 +2026,108 @@ const baseGames = [
     controls: "Click to interact",
     category: "Strategy"
 },
+{
+ name: "Papa's Burgeria",
+ url: "/pages/pburger/index.html",
+ image: "pages/pburger/pb.png",
+ description: "A time-management restaurant simulation where you take burger orders, prepare bugers with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble burgers, click to serve",
+ category: "Strategy"
+},
+{
+ name: "Papa's Taco Mia",
+ url: "/pages/ptaco/index.html",
+ image: "pages/ptaco/pt.webp",
+ description: "A time-management restaurant simulation where you take taco orders, prepare tacos with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble tacos, click to serve",
+ category: "Strategy"
+},
+{
+ name: "Papa's Freezeria",
+ url: "/pages/pfreeze/index.html",
+ image: "pages/pfreeze/pf.webp",
+ description: "A time-management restaurant simulation where you take ice-cream orders, prepare ice-cream with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble ice-cream, click to serve",
+ category: "Strategy"
+},
+{
+ name: "Papa's Pancakeria",
+ url: "/pages/ppancake/index.html",
+ image: "pages/ppancake/pp.webp",
+ description: "A time-management restaurant simulation where you take pancake orders, prepare pacakes with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble pacakes, click to serve",
+ category: "Strategy"
+},
+{
+ name: "Papa's Wingeria",
+ url: "/pages/pwing/index.html",
+ image: "pages/pwing/pw.png",
+ description: "A time-management restaurant simulation where you take wing orders, prepare wings with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble wings, click to serve",
+ category: "Strategy"
+},
+{
+ name: "Papa's Hot Doggeria",
+ url: "/pages/photdog/index.html",
+ image: "pages/photdog/ph.png",
+ description: "A time-management restaurant simulation where you take hotdog orders, prepare hotdog with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble hotdogs, click to serve",
+ category: "Strategy"
+},
+{
+ name: "Papa's Cupcakeria",
+ url: "/pages/pcup/index.html",
+ image: "pages/pcup/pc.jpeg",
+ description: "A time-management restaurant simulation where you take cupcake orders, prepare cupcakes with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble cupcakes, click to serve",
+ category: "Strategy"
+},
+{
+ name: "Papa's Pastaria",
+ url: "/pages/ppaste/index.html",
+ image: "pages/ppaste/pp.jpeg",
+ description: "A time-management restaurant simulation where you take pastery orders, prepare pastery with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble pastery, click to serve",
+ category: "Strategy"
+},
+{
+ name: "Papa's Donuteria",
+ url: "/pages/pdog/index.html",
+ image: "pages/pdog/pd.jpeg",
+ description: "A time-management restaurant simulation where you take donut orders, prepare donuts with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble donuts, click to serve",
+ category: "Strategy"
+},
+{
+ name: "Papa's Cheeseria",
+ url: "/pages/pcheese/index.html",
+ image: "pages/pcheese/pc.webp",
+ description: "A time-management restaurant simulation where you take grilled cheese orders, prepare grilled cheeses with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble grilled cheeses, click to serve",
+ category: "Strategy"
+},
+{
+ name: "Papa's Bakeria",
+ url: "/pages/pbake/index.html",
+ image: "pages/pbake/pb.jpeg",
+ description: "A time-management restaurant simulation where you take baking orders, prepare bakings with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble baked things, click to serve",
+ category: "Strategy"
+},
+{
+ name: "Papa's Sushiria",
+ url: "/pages/psush/index.html",
+ image: "pages/psush/ps.webp",
+ description: "A time-management restaurant simulation where you take sushi orders, prepare sushi with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble sushi, click to serve",
+ category: "Strategy"
+},
+{
+ name: "Papa's Scooperia",
+ url: "/pages/pscoop/index.html",
+ image: "pages/pscoop/ps.webp",
+ description: "A time-management restaurant simulation where you take ice-cream orders, prepare ice-cream with custom toppings, and serve customers while managing a growing business." ,
+ controls: "Mouse to select ingredients and assemble ice-cream, click to serve",
+ category: "Strategy"
+},
 ];

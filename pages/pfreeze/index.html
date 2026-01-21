@@ -1,0 +1,58 @@
+<html>
+<head>
+
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Big Red Button | 3kh0</title>
+<link href="bigredbutton.png" rel="icon" type="image/x-icon"/>
+<link href="bigredbutton.png" rel="shortcut icon" type="image/x-icon"/>
+
+<style>
+    .watermark-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+        z-index: 9999;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+    }
+    .watermark-box:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "v0jm16pm5i");
+</script>
+
+</head>
+<body>
+<div height="100%" id="ruffle" width="100%"></div>
+<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+<script>
+      window.RufflePlayer = window.RufflePlayer || {};
+      window.addEventListener("load", (event) => {
+        const ruffle = window.RufflePlayer.newest();
+        const player = ruffle.createPlayer();
+        const container = document.getElementById("ruffle");
+        player.id = "player";
+        player.style.width = "100%";
+        player.style.height = "100%";
+        container.appendChild(player);
+        player.load("papasfreezeria.swf");
+      });
+    </script>
+
+
+</body>
+</html>
