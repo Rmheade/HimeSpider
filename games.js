@@ -267,8 +267,8 @@ const baseGames = [
  category: "Sandbox"
 },
 {
- name: "Celeste-Pico8",
- url: "/pages/celeste-pico8/celeste.html",
+ name: "Celeste",
+ url: "https://lkarch.org/celeste/",
  image: "pages/celeste-pico8/celeste.jpg",
  description: "A challenging pixel-art platformer following a climber ascending a mountain filled with perilous jumps, wall-slides, and dash mechanics with an emotional narrative." ,
  controls: "Arrow Keys or WASD to move, Spacebar to jump, Shift to dash",
@@ -2025,5 +2025,5 @@ const baseGames = [
     description: "Jacksmith is the craftiest donkey in all the land. In Jacksmith, you are a blacksmith crafting a wide range of weapons for all of your warriors",
     controls: "Click to interact",
     category: "Strategy"
-}
+},
 ];
