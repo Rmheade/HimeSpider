@@ -2017,5 +2017,13 @@ const baseGames = [
     description: "Build your spaceship from scratch, earn funds and invest them into building a bigger, better spaceship as you try and fly your way up to space!",
     controls: "Mouse to aim launch angle, click to start, arrow keys during flight",
     category: "Strategy"
+},
+{
+    name: "Jacksmith",
+    url: "pages/jack/index.html",
+    image: "pages/jack/Jack.webp",
+    description: "Jacksmith is the craftiest donkey in all the land. In Jacksmith, you are a blacksmith crafting a wide range of weapons for all of your warriors",
+    controls: "Click to interact",
+    category: "Strategy"
 }
 ];
