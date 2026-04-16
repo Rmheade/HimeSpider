@@ -1,4 +1,4 @@
-̄<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <style>
@@ -83,6 +83,7 @@ padding-top: 10vh;
   </head>
 <body>
 <script>
+
 function openLauncher() {
     var sites = [
         { name: "Omtegu Embedder + Games", url: "https://lkarch.org/omtegu/embedder.html" },
@@ -90,31 +91,33 @@ function openLauncher() {
         { name: "Unblocked Internet ", url: "https://scr.koyeb.app/" }
     ];
 
-    let buttonsHTML = "";
-    for (let i = 0; i < sites.length; i++) {
-        buttonsHTML += `
-            <button class="launch-btn" onclick="loadSite('${sites[i].url}')">
-                ${sites[i].name}
-            </button>
-        `;
+    let containerDiv = document.createElement('div');
+    containerDiv.className = 'container';
+
+    for (let site of sites) {
+        let button = document.createElement('button');
+        button.className = 'launch-btn';
+        button.textContent = site.name;
+        button.onclick = () => loadSite(site.url);
+        containerDiv.appendChild(button);
     }
 
-    document.write(`
-            <div class="container">
-                ${buttonsHTML}
-            </div>
-<div class="footer">
-    <div class="contact-box">
-    <div>This came to me in a dream</div>
-        <div>Contact:</div>
-        <div>omegaomeg7@gmail.com</div>
-        <div>omtegu2@gmail.com</div>
-        <div>himespider1@gmail.com</div>
-        <div>nullframe01@gmail.com</div>\
-    </div>
-</div>
-    `);
+    let footerDiv = document.createElement('div');
+    footerDiv.className = 'footer';
+    footerDiv.innerHTML = `
+        <div class="contact-box">
+            <div>This came to me in a dream</div>
+            <div>Contact:</div>
+            <div>omegaomeg7@gmail.com</div>
+            <div>omtegu2@gmail.com</div>
+            <div>himespider1@gmail.com</div>
+            <div>nullframe01@gmail.com</div>
+        </div>`;
+    
+    document.body.appendChild(containerDiv);
+    document.body.appendChild(footerDiv);
 }
+
 openLauncher();
 </script>
 <script>
