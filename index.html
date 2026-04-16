@@ -1,63 +1,135 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Simple Button Page</title>
-   <style>
-       body {
-           font-family: sans-serif;
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           height: 100vh;
-           margin: 0;
-           background-color: #f4f4f9;
-       }
-       .container {
-           display: flex;
-           gap: 20px;
-       }
-       button {
-           padding: 15px 30px;
-           font-size: 16px;
-           cursor: pointer;
-           background-color: #007bff;
-           color: white;
-           border: none;
-           border-radius: 5px;
-           transition: background-color 0.3s;
-       }
-       button:hover {
-           background-color: #0056b3;
-       }
-   </style>
-</head>
+̄<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+            body {
+                margin: 0;
+                background: #000;
+                font-family: sans-serif;
+                color: #a855f7;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+padding-top: 10vh;
+                height: 100vh;
+            }
+
+            .container {
+                width: 50%; 
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .launch-btn {
+                padding: 20px;
+                font-size: 1.5rem;
+                background: #050505;
+                color: #c084fc;
+                border: 2px solid transparent;
+                border-radius: 12px;
+                cursor: pointer;
+                position: relative;
+                transition: 0.2s;
+            }
+
+
+            .launch-btn::before {
+                content: "";
+                position: absolute;
+                inset: -2px;
+                border-radius: 12px;
+                background: linear-gradient(45deg, #38bdf8, #60a5fa, #38bdf8);
+                z-index: -1;
+                filter: blur(6px);
+                opacity: 0.7;
+            }
+
+            .launch-btn:hover {
+                transform: scale(1.03);
+                background: #0a0a0a;
+            }
+.footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-box {
+    width: 50%; 
+    background: #050505;
+    color: #93c5fd;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+
+.contact-box::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #38bdf8, #60a5fa);
+    z-index: -1;
+    filter: blur(4px);
+    opacity: 0.6;
+}
+        </style>
+  </head>
 <body>
-
-   <div class="container">
-       <button onclick="openThing('https://studying.work.gd/games.html')">Games</button>
-       <button onclick="openThing('https://scr.koyeb.app')">Unblocker</button>
-       <button onclick="openThing('https://lkarch.org/omtegu/embedder.html')">Omtegu Embedder</button>
-   </div>
-</body>
 <script>
- function openThing(game) {
-   var url = game
-   var win = window.open('about:blank', '_blank');
-   win.document.body.style.margin = '0';
-   win.document.body.style.height = '100vh'
-   var iframe = win.document.createElement('iframe');
-   iframe.style.border = 'none';
-   iframe.style.width = '100%';
-   iframe.style.height = '100%';
-   iframe.src=url
-   win.document.body.appendChild(iframe);
- }
+function openLauncher() {
+    var sites = [
+        { name: "Omtegu Embedder + Games", url: "https://lkarch.org/omtegu/embedder.html" },
+        { name: "Himespider - Games", url: "https://studying.work.gd/games.html" },
+        { name: "Unblocked Internet ", url: "https://scr.koyeb.app/" }
+    ];
+
+    let buttonsHTML = "";
+    for (let i = 0; i < sites.length; i++) {
+        buttonsHTML += `
+            <button class="launch-btn" onclick="loadSite('${sites[i].url}')">
+                ${sites[i].name}
+            </button>
+        `;
+    }
+
+    document.write(`
+            <div class="container">
+                ${buttonsHTML}
+            </div>
+<div class="footer">
+    <div class="contact-box">
+    <div>This came to me in a dream</div>
+        <div>Contact:</div>
+        <div>omegaomeg7@gmail.com</div>
+        <div>omtegu2@gmail.com</div>
+        <div>himespider1@gmail.com</div>
+        <div>nullframe01@gmail.com</div>\
+    </div>
+</div>
+    `);
+}
+openLauncher();
 </script>
+<script>
+                function loadSite(url) {
+                    var win = window.open('about:blank', '_blank');
+                    win.document.body.style.margin = '0';
+                    win.document.body.style.height = '100vh'
+                    var iframe = win.document.createElement('iframe');
+                    iframe.style.border = 'none';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.src=url
+                    win.document.body.appendChild(iframe);
+                }
+            </script>
+</body>
 </html>
-
-
-
-
 
