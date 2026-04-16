@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+            body {
+                margin: 0;
+                background: #000;
+                font-family: sans-serif;
+                color: #a855f7;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+padding-top: 10vh;
+                height: 100vh;
+            }
+
+            .container {
+                width: 50%; 
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .launch-btn {
+                padding: 20px;
+                font-size: 1.5rem;
+                background: #050505;
+                color: #c084fc;
+                border: 2px solid transparent;
+                border-radius: 12px;
+                cursor: pointer;
+                position: relative;
+                transition: 0.2s;
+            }
+
+
+            .launch-btn::before {
+                content: "";
+                position: absolute;
+                inset: -2px;
+                border-radius: 12px;
+                background: linear-gradient(45deg, #38bdf8, #60a5fa, #38bdf8);
+                z-index: -1;
+                filter: blur(6px);
+                opacity: 0.7;
+            }
+
+            .launch-btn:hover {
+                transform: scale(1.03);
+                background: #0a0a0a;
+            }
+.footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-box {
+    width: 50%; 
+    background: #050505;
+    color: #93c5fd;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+
+.contact-box::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #38bdf8, #60a5fa);
+    z-index: -1;
+    filter: blur(4px);
+    opacity: 0.6;
+}
+        </style>
+  </head>
+<body>
+<script>
+
+function openLauncher() {
+    var sites = [
+        { name: "Omtegu Embedder + Games", url: "https://lkarch.org/omtegu/embedder.html" },
+        { name: "Himespider - Games", url: "https://studying.work.gd/games.html" },
+        { name: "Unblocked Internet ", url: "https://scr.koyeb.app/" }
+    ];
+
+    let containerDiv = document.createElement('div');
+    containerDiv.className = 'container';
+
+    for (let site of sites) {
+        let button = document.createElement('button');
+        button.className = 'launch-btn';
+        button.textContent = site.name;
+        button.onclick = () => loadSite(site.url);
+        containerDiv.appendChild(button);
+    }
+
+    let footerDiv = document.createElement('div');
+    footerDiv.className = 'footer';
+    footerDiv.innerHTML = `
+        <div class="contact-box">
+            <div>This came to me in a dream</div>
+            <div>Contact:</div>
+            <div>omegaomeg7@gmail.com</div>
+            <div>omtegu2@gmail.com</div>
+            <div>himespider1@gmail.com</div>
+            <div>nullframe01@gmail.com</div>
+        </div>`;
+    
+    document.body.appendChild(containerDiv);
+    document.body.appendChild(footerDiv);
+}
+
+openLauncher();
+</script>
+<script>
+                function loadSite(url) {
+                    var win = window.open('about:blank', '_blank');
+                    win.document.body.style.margin = '0';
+                    win.document.body.style.height = '100vh'
+                    var iframe = win.document.createElement('iframe');
+                    iframe.style.border = 'none';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.src=url
+                    win.document.body.appendChild(iframe);
+                }
+            </script>
+</body>
+</html>
+
